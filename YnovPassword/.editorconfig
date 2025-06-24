@@ -1,0 +1,52 @@
+# Top-most EditorConfig file
+root = true
+
+# All files
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+charset = utf-8
+
+# C# files
+[*.cs]
+
+# Use four spaces for indentation
+indent_style = space
+indent_size = 4
+
+# Use UTF-8 encoding
+charset = utf-8
+
+# End each file with a newline
+insert_final_newline = true
+
+# Trim trailing whitespace on save
+trim_trailing_whitespace = true
+
+# C# specific formatting options
+# See https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/
+
+# Require braces on all control blocks (if, else, etc.)
+csharp_prefer_braces = true:suggestion
+
+# Require expression-bodied members for properties, methods, etc.
+csharp_style_expression_bodied_methods = false:silent
+
+# New line preferences
+csharp_new_line_before_open_brace = all
+
+# Space preferences
+csharp_space_after_keywords_in_control_flow = true
+
+# Naming conventions
+dotnet_naming_rule.interface_should_start_with_i.severity = suggestion
+dotnet_naming_rule.interface_should_start_with_i.symbols = interfaces
+dotnet_naming_rule.interface_should_start_with_i.style = prefix_i
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_symbols.interfaces.applicable_accessibilities = *
+dotnet_naming_symbols.interfaces.required_modifiers = *
+
+dotnet_naming_style.prefix_i.required_prefix = I
+dotnet_naming_style.prefix_i.capitalization = pascal_case

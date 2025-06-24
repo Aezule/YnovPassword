@@ -8,5 +8,87 @@
         x:Class="YnovPassword.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="YnovPassword">
-        <views:MainView />
+
+    <Window.Styles>
+        <StyleInclude  Source="/Styles/style.axaml"></StyleInclude>
+    </Window.Styles>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="txtRecherche" Classes="outline" Watermark="Recherchez un nom, email, type" HorizontalAlignment="Left" VerticalAlignment="Center"
+                Margin="10 0" TextWrapping="Wrap" Text="" Width="300" Grid.Row="0" TextChanged="TxtRecherche_TextChanged" />
+
+        <Button x:Name="questions" Content="?" ToolTip.Tip="Je sais pas à quoi ça sert mais (❁´◡`❁)" Classes="accent" Grid.Row="0" Margin="0 0 10 0"
+                HorizontalAlignment="Right" VerticalAlignment="Center" />
+
+        <!-- ROW 2 - Design en colonne (vertical) avec des éléments cliquables -->
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="lstAccounts">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10,5" Padding="15" CornerRadius="8"
+                                Background="#f0f0f0"
+                               >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="40"/>
+                                    <!-- Eye icon grid -->
+                                    <ColumnDefinition Width="40"/>
+                                    <!-- Copy icon grid -->
+                                    <ColumnDefinition Width="40"/>
+                                    <!-- Bin icon grid -->
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Name}"
+                                           FontWeight="Bold" FontSize="16" VerticalAlignment="Center"/>
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Type: " FontWeight="SemiBold" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding TypeProfile}" Margin="0,0,15,0"/>
+                                    <TextBlock Text="URL: " FontWeight="SemiBold" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding URL}" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <!-- Eye Icon -->
+                                <Button Grid.Column="2" Click="ViewButton_Click" Width="30" Height="30" Padding="0" ToolTip.Tip="Affiche plus d'informations" Background="Transparent" BorderThickness="0">
+                                    <Path Data="M1,12 C1,12 5,4 12,4 C19,4 23,12 23,12 C23,12 19,20 12,20 C5,20 1,12 1,12 Z M12,16 C14.2091,16 16,14.2091 16,12 C16,9.79086 14.2091,8 12,8 C9.79086,8 8,9.79086 8,12 C8,14.2091 9.79086,16 12,16 Z M12,14 C13.1046,14 14,13.1046 14,12 C14,10.8954 13.1046,10 12,10 C10.8954,10 10,10.8954 10,12 C10,13.1046 10.8954,14 12,14 Z" Fill="Black"/>
+                                </Button>
+
+                                <!-- Copy Icon -->
+                                <Button Grid.Column="3" Width="30" Height="30" Padding="0" Background="Transparent" ToolTip.Tip="Copie le mot de passe" BorderThickness="0" Click="CopyButton_Click">
+                                    <Path Data="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" Fill="Black"/>
+                                </Button>
+
+                                <!-- Bin Icon -->
+                                <Button Grid.Column="4" Click="DeleteButton_Click" Width="30" Height="30" Padding="0" ToolTip.Tip="Supprime le compte" Background="Transparent" BorderThickness="0">
+                                    <Path Data="M3 6 L5 6 L21 6 M19 6 L17 6 L15 6 L13 6 L11 6 L9 6 L7 6 M18 6 L18 20 L6 20 L6 6" Stroke="Black" StrokeThickness="2" />
+                                </Button>
+                            </Grid>
+
+                        </Border>
+                    </DataTemplate>
+
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- ROW 3 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+            <Button x:Name="btnAjouterCompte" Content="Ajouter un compte" Classes="accent" Margin="0,0,10,0" Click="BtnAjouterCompte_Click" />
+            <TextBlock Text="Nombre de comptes: " VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBlock x:Name="txtCompteTotal" Text="0" VerticalAlignment="Center" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
 </Window>

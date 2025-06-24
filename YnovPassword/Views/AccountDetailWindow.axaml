@@ -1,0 +1,73 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
+        Width="800" Height="550"
+        x:Class="YnovPassword.Views.AccountDetailsWindow"
+        Title="Détails du Compte"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Styles>
+        <StyleInclude  Source="/Styles/style.axaml"></StyleInclude>
+    </Window.Styles>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Titre -->
+        <TextBlock Grid.Row="0" Text="Détails du Compte"
+                   FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <!-- Formulaire -->
+        <StackPanel Grid.Row="1" Spacing="15">
+            <StackPanel>
+                <TextBlock Text="Nom" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtName" Classes="outline" Height="40"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Type de profil" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtTypeProfile" Classes="outline" Height="40"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="URL" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtUrl" Classes="outline" Height="40"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Identifiant" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtLogin" Classes="outline" Height="40"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Mot de passe" Margin="0,0,0,5"/>
+                <Grid Height="40">
+                    <TextBox x:Name="txtPassword"  Classes="outline" IsReadOnly="True" />
+
+                    <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Click="OnEditPasswordClicked"
+                         Background="Transparent" Margin="0,0,10,0" Padding="0" BorderThickness="0" ToolTip.Tip="Clique ici pour modifier le mot de passe" >
+                        <Path Data="M12,2 L14,4 L5,13 L3,13 L3,11 Z" Fill="Black" />
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <!-- Boutons d'action -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,20,0,0">
+
+                <Button x:Name="btnSave" Content="Enregistrer" Classes="accent"
+						Click="BtnSave_Click"/>
+                <Button x:Name="btnCancel" Content="Annuler"
+						Click="BtnCancel_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Window>
