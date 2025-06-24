@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
+using System;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using YnovPassword.Models;
@@ -68,6 +69,26 @@ namespace YnovPassword.Views
             Close();
         }
 
+
+        private void OnGeneratePasswordClicked(object sender, RoutedEventArgs e)
+        {
+            string generatedPassword = GenerateStrongPassword(24);
+            txtPassword.Text = generatedPassword;
+        }
+
+        private string GenerateStrongPassword(int length)
+        {
+            // génère un mot de passe avec des caractères aléatoires
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+";
+            var res = new char[length];
+            var rnd = new Random();
+
+            for (int i = 0; i < length; i++)
+            {
+                res[i] = valid[rnd.Next(valid.Length)];
+            }
+            return new string(res);
+        }
 
         private void OnEditPasswordClicked(object sender, RoutedEventArgs e)
         {

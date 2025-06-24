@@ -53,6 +53,15 @@
                          Background="Transparent" Margin="0,0,10,0" Padding="0" BorderThickness="0" ToolTip.Tip="Clique ici pour modifier le mot de passe" >
                         <Path Data="M12,2 L14,4 L5,13 L3,13 L3,11 Z" Fill="Black" />
                     </Button>
+
+
+                    <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Click="OnGeneratePasswordClicked"
+                                Background="Transparent" Margin="0,0,40,0" Padding="0" BorderThickness="0"
+                                    ToolTip.Tip="Générer un mot de passe fort" >
+                        <Path Data="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z" Fill="Black" />
+                        <!-- Exemple icône info (point d'exclamation dans cercle), tu peux changer le Path -->
+                    </Button>
                 </Grid>
             </StackPanel>
 
