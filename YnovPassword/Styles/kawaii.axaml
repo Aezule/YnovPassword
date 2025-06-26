@@ -1,0 +1,138 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="10">
+                <Button Content="Bouton Standard"/>
+                <Button Classes="accent" Content="Bouton Accent"/>
+                <Button Classes="outline" Content="Bouton Outline"/>
+                <TextBox Watermark="Saisissez du texte kawaii ✨"/>
+                <DataGrid Height="100">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Colonne 1"/>
+                        <DataGridTextColumn Header="Colonne 2"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- 🎀 Couleurs pastel kawaii -->
+    <Styles.Resources>
+        <Color x:Key="PrimaryColor">#FFB6C1</Color> <!-- LightPink -->
+        <Color x:Key="PrimaryDarkColor">#FF69B4</Color> <!-- HotPink -->
+        <Color x:Key="PrimaryLightColor">#FFE4E1</Color> <!-- MistyRose -->
+        <Color x:Key="AccentColor">#FF69B4</Color> <!-- HotPink -->
+        <Color x:Key="TextColor">#880E4F</Color> <!-- Deep rose -->
+        <Color x:Key="BackgroundColor">#FFF0F8FF</Color> <!-- AliceBlue -->
+        <Color x:Key="BorderColor">#FFD1DC</Color> <!-- Pastel pink -->
+    </Styles.Resources>
+
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter, sans-serif"/>
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="#FFFFF0F5"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="BorderBrush" Value="#FFECB3"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="10 8"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+    <Style Selector="TextBox:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightColor}"/>
+        <Setter Property="Background" Value="#FFFDEEF4"/>
+    </Style>
+
+    <Style Selector="TextBox:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="16 10"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
+    </Style>
+
+    <Style Selector="Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryDarkColor}"/>
+    </Style>
+
+    <Style Selector="Button:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.95)"/>
+    </Style>
+
+    <Style Selector="Button.accent">
+        <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style Selector="Button.outline">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentColor}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style Selector="Button.outline:pointerover">
+        <Setter Property="Background" Value="#FFF8EAF6"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryDarkColor}"/>
+    </Style>
+
+    <Style Selector="DataGrid">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource BorderColor}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource BorderColor}"/>
+    </Style>
+
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
+    </Style>
+
+    <Style Selector="DataGridRow:selected">
+        <Setter Property="Background" Value="#FFFFC1E3"/>
+    </Style>
+
+    <Style Selector="DataGridRow:pointerover /template/ Rectangle#BackgroundRectangle">
+        <Setter Property="Fill" Value="#FFFFE6F0"/>
+    </Style>
+
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="Background" Value="#FFFDEEF4"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Padding" Value="10 8"/>
+    </Style>
+
+    <Style Selector="ToolTip">
+        <Setter Property="Background" Value="#FFFFF0F5"/>
+        <Setter Property="Foreground" Value="#880E4F"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="BorderBrush" Value="#FFD1DC"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+</Styles>

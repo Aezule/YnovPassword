@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner">
 
     <Window.Styles>
-        <StyleInclude  Source="/Styles/style.axaml"></StyleInclude>
+        <StyleInclude  Source="/Styles/kawaii.axaml"></StyleInclude>
     </Window.Styles>
 
     <Grid Margin="20">

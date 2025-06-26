@@ -4,7 +4,7 @@ using Avalonia.Layout;
 using System;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using YnovPassword.Models;
+using YnovPassword.Modele;
 
 namespace YnovPassword.Views
 {

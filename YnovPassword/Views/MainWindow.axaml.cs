@@ -3,9 +3,13 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Styling;
+using DynamicData;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using YnovPassword.Models;
+using YnovPassword.Modele;
 using static System.Net.Mime.MediaTypeNames;
 
 
@@ -20,7 +24,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        LoadDataFromDatabase();
+        //LoadDataFromDatabase();
+
     }
 
 
@@ -154,6 +159,8 @@ public partial class MainWindow : Window
             await this.Clipboard.SetTextAsync(passwordToCopy);
         }
     }
+
+
 
 
     protected override void OnClosed(System.EventArgs e)

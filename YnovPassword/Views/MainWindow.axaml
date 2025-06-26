@@ -10,7 +10,7 @@
         Title="YnovPassword">
 
     <Window.Styles>
-        <StyleInclude  Source="/Styles/style.axaml"></StyleInclude>
+        <StyleInclude  Source="/Styles/kawaii.axaml"></StyleInclude>
     </Window.Styles>
 
     <Grid>
@@ -25,6 +25,8 @@
 
         <Button x:Name="questions" Content="?" ToolTip.Tip="Je sais pas à quoi ça sert mais (❁´◡`❁)" Classes="accent" Grid.Row="0" Margin="0 0 10 0"
                 HorizontalAlignment="Right" VerticalAlignment="Center" />
+
+
 
         <!-- ROW 2 - Design en colonne (vertical) avec des éléments cliquables -->
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

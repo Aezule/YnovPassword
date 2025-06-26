@@ -1,6 +1,6 @@
 using System;
 
-namespace YnovPassword.Models
+namespace YnovPassword.Modele
 {
     public class Account
     {
