@@ -8,9 +8,9 @@ namespace YnovPassword.Views
 {
     public partial class AccountDetailsWindow : Window
     {
-        private Account _account;
-        private PasswordContext _dbContext;
-        private bool _isNewAccount;
+        readonly private Account _account;
+        readonly private PasswordContext _dbContext;
+        readonly private bool _isNewAccount;
 
         public bool IsSaved { get; private set; }
 
@@ -46,7 +46,6 @@ namespace YnovPassword.Views
 
         private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Mettre à jour les données du compte
             _account.Name = txtName.Text;
             _account.TypeProfile = txtTypeProfile.Text;
             _account.URL = txtUrl.Text;
@@ -74,9 +73,8 @@ namespace YnovPassword.Views
             txtPassword.Text = generatedPassword;
         }
 
-        private string GenerateStrongPassword(int length)
+        private static string GenerateStrongPassword(int length)
         {
-            // génère un mot de passe avec des caractères aléatoires
             const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+";
             var res = new char[length];
             var rnd = new Random();

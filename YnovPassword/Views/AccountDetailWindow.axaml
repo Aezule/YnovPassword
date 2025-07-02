@@ -8,9 +8,7 @@
         Title="Détails du Compte"
         WindowStartupLocation="CenterOwner">
 
-    <Window.Styles>
-        <StyleInclude  Source="/Styles/kawaii.axaml"></StyleInclude>
-    </Window.Styles>
+
 
     <Grid Margin="20">
         <Grid.RowDefinitions>

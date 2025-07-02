@@ -9,9 +9,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="YnovPassword">
 
-    <Window.Styles>
-        <StyleInclude  Source="/Styles/kawaii.axaml"></StyleInclude>
-    </Window.Styles>
+
 
     <Grid>
         <Grid.RowDefinitions>

@@ -4,12 +4,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
         x:Class="YnovPassword.LoginWindow"
-        Height="300" Width="400"
+        Height="300" Width="450"
         Title="Connexion">
 
-    <Window.Styles>
-        <StyleInclude Source="/Styles/kawaii.axaml"/>
-    </Window.Styles>
+
 
     <Grid Margin="20">
         <Grid.RowDefinitions>

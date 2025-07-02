@@ -7,9 +7,6 @@
         x:Class="YnovPassword.SignIn"
         Title="SignIn">
 
-    <Window.Styles>
-        <StyleInclude Source="/Styles/kawaii.axaml"/>
-    </Window.Styles>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
