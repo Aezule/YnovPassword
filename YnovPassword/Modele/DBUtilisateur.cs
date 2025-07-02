@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YnovPassword.Modele
 {
-    class DBUtilisateur
+    public class DBUtilisateur
     {
+
+        [Key]
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Le nom est requis.")]
         [StringLength(50, ErrorMessage = "Le nom ne peut pas dépasser 50 caractères.")]
@@ -16,8 +15,13 @@ namespace YnovPassword.Modele
         public string Prenom { get; set; }
         public string Email { get; set; }
         public string MotDePasse { get; set; }
-        public DBUtilisateur(string nom, string prenom, string email, string motDePasse, string role)
+
+        // Navigation property (one-to-many)
+        public ICollection<Account> Accounts { get; set; } = new List<Account>();
+
+        public DBUtilisateur(int id, string nom, string prenom, string email, string motDePasse, string role)
         {
+            Id = id;
             Nom = nom;
             Prenom = prenom;
             Email = email;
@@ -26,6 +30,7 @@ namespace YnovPassword.Modele
 
         public DBUtilisateur()
         {
+            Id = 0;
             Nom = string.Empty;
             Prenom = string.Empty;
             Email = string.Empty;
@@ -36,6 +41,7 @@ namespace YnovPassword.Modele
         {
             return $"{Nom} {Prenom} - {Email}";
         }
+
 
 
     }

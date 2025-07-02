@@ -2,8 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using System;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using YnovPassword.Modele;
 
 namespace YnovPassword.Views

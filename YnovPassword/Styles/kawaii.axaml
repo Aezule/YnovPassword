@@ -20,13 +20,20 @@
 
     <!-- 🎀 Couleurs pastel kawaii -->
     <Styles.Resources>
-        <Color x:Key="PrimaryColor">#FFB6C1</Color> <!-- LightPink -->
-        <Color x:Key="PrimaryDarkColor">#FF69B4</Color> <!-- HotPink -->
-        <Color x:Key="PrimaryLightColor">#FFE4E1</Color> <!-- MistyRose -->
-        <Color x:Key="AccentColor">#FF69B4</Color> <!-- HotPink -->
-        <Color x:Key="TextColor">#880E4F</Color> <!-- Deep rose -->
-        <Color x:Key="BackgroundColor">#FFF0F8FF</Color> <!-- AliceBlue -->
-        <Color x:Key="BorderColor">#FFD1DC</Color> <!-- Pastel pink -->
+        <Color x:Key="PrimaryColor">#FFB6C1</Color>
+        <!-- LightPink -->
+        <Color x:Key="PrimaryDarkColor">#FF69B4</Color>
+        <!-- HotPink -->
+        <Color x:Key="PrimaryLightColor">#FFE4E1</Color>
+        <!-- MistyRose -->
+        <Color x:Key="AccentColor">#FF69B4</Color>
+        <!-- HotPink -->
+        <Color x:Key="TextColor">#880E4F</Color>
+        <!-- Deep rose -->
+        <Color x:Key="BackgroundColor">#FFF0F8FF</Color>
+        <!-- AliceBlue -->
+        <Color x:Key="BorderColor">#FFD1DC</Color>
+        <!-- Pastel pink -->
     </Styles.Resources>
 
     <Style Selector="Window">
@@ -44,10 +51,7 @@
         <Setter Property="FontSize" Value="15"/>
     </Style>
 
-    <Style Selector="TextBox:pointerover">
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightColor}"/>
-        <Setter Property="Background" Value="#FFFDEEF4"/>
-    </Style>
+
 
     <Style Selector="TextBox:focus">
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryDarkColor}"/>

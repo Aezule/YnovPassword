@@ -27,27 +27,27 @@
         <StackPanel Grid.Row="1" Spacing="15">
             <StackPanel>
                 <TextBlock Text="Nom" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtName" Classes="outline" Height="40"/>
+                <TextBox x:Name="txtName" />
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Type de profil" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtTypeProfile" Classes="outline" Height="40"/>
+                <TextBox x:Name="txtTypeProfile" />
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="URL" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtUrl" Classes="outline" Height="40"/>
+                <TextBox x:Name="txtUrl" />
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Identifiant" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtLogin" Classes="outline" Height="40"/>
+                <TextBox x:Name="txtLogin" />
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Mot de passe" Margin="0,0,0,5"/>
                 <Grid Height="40">
-                    <TextBox x:Name="txtPassword"  Classes="outline" IsReadOnly="True" />
+                    <TextBox x:Name="txtPassword"  IsReadOnly="True" />
 
                     <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Click="OnEditPasswordClicked"
                          Background="Transparent" Margin="0,0,10,0" Padding="0" BorderThickness="0" ToolTip.Tip="Clique ici pour modifier le mot de passe" >

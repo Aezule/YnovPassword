@@ -1,16 +1,13 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml.Styling;
-using Avalonia.Styling;
-using DynamicData;
+using Avalonia.Platform.Storage;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using YnovPassword.Modele;
-using static System.Net.Mime.MediaTypeNames;
 
 
 
@@ -115,6 +112,97 @@ public partial class MainWindow : Window
             LoadDataFromDatabase();
         }
     }
+
+
+
+    private void ShowMessageInPopup(string message)
+    {
+        PopupMessage.Text = message;
+        MessagePopup.IsOpen = true;
+    }
+
+    private void ClosePopup_Click(object? sender, RoutedEventArgs e)
+    {
+        MessagePopup.IsOpen = false;
+    }
+
+    private void BtnDeconnexion_Click(object? sender, RoutedEventArgs e)
+    {
+        AuthStorage.ClearLogin();
+
+        var loginWindow = new LoginWindow(new PasswordContext());
+        loginWindow.Show();
+        this.Close();
+    }
+
+
+    private async void BtnImport_Click(object? sender, RoutedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        if (topLevel == null)
+        {
+            SystemException ex = new SystemException("Erreur lors de l'ouverture de la page Windows.");
+            PasswordContext.GetInExceptionErrorLog(ex);
+            return;
+        }
+
+        var fileType = new FilePickerFileType("CSV Files")
+        {
+            Patterns = new[] { "*.csv" }
+        };
+
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = "Importer un fichier CSV",
+            AllowMultiple = false,
+            FileTypeFilter = new[] { fileType }
+        });
+
+        if (files is null || files.Count == 0)
+            return;
+
+        var file = files[0];
+
+        try
+        {
+            await using var stream = await file.OpenReadAsync();
+            using var reader = new StreamReader(stream, System.Text.Encoding.UTF8);
+
+            var mots = new List<Dictionnaire>();
+
+            while (!reader.EndOfStream)
+            {
+                var line = await reader.ReadLineAsync();
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                mots.Add(new Dictionnaire
+                {
+                    Mot = line.Trim()
+                });
+            }
+
+            if (mots.Count > 0)
+            {
+                using var db = new PasswordContext();
+                await db.AddRangeAsync(mots);
+                await db.SaveChangesAsync();
+
+                ShowMessageInPopup("Importation réussie !");
+
+            }
+            else
+            {
+                ShowMessageInPopup("Aucun mot trouvé dans le fichier.");
+            }
+        }
+        catch (Exception ex)
+        {
+            PasswordContext.GetInExceptionErrorLog(ex);
+        }
+    }
+
+
+
 
 
     private async void ViewButton_Click(object? sender, RoutedEventArgs e)

@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+        x:Class="YnovPassword.LoginWindow"
+        Height="300" Width="400"
+        Title="Connexion">
+
+    <Window.Styles>
+        <StyleInclude Source="/Styles/kawaii.axaml"/>
+    </Window.Styles>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Titre -->
+        <TextBlock Grid.Row="0" Text="Connexion à votre compte"
+                   FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <!-- Formulaire de connexion -->
+        <StackPanel Grid.Row="1" Spacing="15">
+            <StackPanel>
+                <TextBlock Text="Identifiant" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtUsername" />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Mot de passe" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtPassword"  PasswordChar="●"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Boutons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,20,0,0">
+            <Button x:Name="btnLogin" Content="Se connecter" Classes="accent"/>
+            <Button x:Name="btnCancel" Content="Annuler"/>
+        </StackPanel>
+    </Grid>
+</Window>
