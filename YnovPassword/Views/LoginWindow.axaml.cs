@@ -17,7 +17,6 @@ public partial class LoginWindow : Window
         InitializeComponent();
 
         btnLogin.Click += LoginClick;
-        btnCancel.Click += BtnCancel_Click;
     }
 
     private async void LoginClick(object? sender, RoutedEventArgs e)
@@ -44,10 +43,16 @@ public partial class LoginWindow : Window
         }
     }
 
-    private void BtnCancel_Click(object? sender, RoutedEventArgs e)
+    private void BtnSignIn_Click(object? sender, RoutedEventArgs e)
     {
-        Close();
+        var signUpWindow = new SignIn(_context);
+        signUpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        signUpWindow.Show();
+        this.Close();
     }
+
+
+
 
     private async Task ShowMessage(string message)
     {

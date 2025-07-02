@@ -19,7 +19,7 @@ namespace YnovPassword.Modele
         // Navigation property (one-to-many)
         public ICollection<Account> Accounts { get; set; } = new List<Account>();
 
-        public DBUtilisateur(int id, string nom, string prenom, string email, string motDePasse, string role)
+        public DBUtilisateur(int id, string nom, string prenom, string email, string motDePasse)
         {
             Id = id;
             Nom = nom;
@@ -35,6 +35,13 @@ namespace YnovPassword.Modele
             Prenom = string.Empty;
             Email = string.Empty;
             MotDePasse = string.Empty;
+        }
+        public DBUtilisateur(string nom, string prenom, string email, string motDePasse)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            Email = email;
+            MotDePasse = motDePasse;
         }
 
         public override string ToString()
