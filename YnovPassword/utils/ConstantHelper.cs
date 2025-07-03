@@ -11,7 +11,7 @@ namespace YnovPassword.utils
         public const string Email = "Robert";
         public const bool IsAdmin = true;
 
-
+        public const string pwndURL = "https://passwords.xposedornot.com/api/v1/pass/anon/";
 
         public static readonly List<string> TypeProfileList = new List<string>
         {
