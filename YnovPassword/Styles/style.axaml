@@ -148,4 +148,39 @@
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
 
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="#3B1A6B"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="BorderBrush" Value="#6C3483"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="10 6"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
+    </Style>
+
+    <Style Selector="ComboBox:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightColor}"/>
+        <Setter Property="Background" Value="#6C3483"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="Padding" Value="8 6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:pointerover">
+        <Setter Property="Background" Value="#7D3C98"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:selected">
+        <Setter Property="Background" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+
 </Styles>

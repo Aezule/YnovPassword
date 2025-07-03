@@ -222,4 +222,40 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="8"/>
     </Style>
+
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="#FFFFF8F8"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="BorderBrush" Value="#FFD1DC"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="12 10"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Segoe UI Emoji, sans-serif"/>
+    </Style>
+
+    <Style Selector="ComboBox:focus">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="Padding" Value="8 6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Segoe UI Emoji, sans-serif"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:pointerover">
+        <Setter Property="Background" Value="#FFFFE6F0"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryDarkColor}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:selected">
+        <Setter Property="Background" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
 </Styles>

@@ -30,7 +30,13 @@
 
             <StackPanel>
                 <TextBlock Text="Type de profil" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtTypeProfile" />
+                <ComboBox x:Name="cbTypeProfile" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
 
             <StackPanel>
@@ -72,9 +78,6 @@
 						Click="BtnCancel_Click"/>
             </StackPanel>
         </StackPanel>
-
-
-
 
     </Grid>
 </Window>

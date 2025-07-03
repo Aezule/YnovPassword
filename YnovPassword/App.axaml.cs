@@ -35,11 +35,11 @@ public partial class App : Application
 
             var context = new PasswordContext(options);
 
-            var savedEmail = AuthStorage.LoadLogin();
+            var savedLogin = AuthStorage.LoadLogin();
 
-            if (!string.IsNullOrEmpty(savedEmail))
+            if (savedLogin != null && !string.IsNullOrEmpty(savedLogin.Email))
             {
-                var user = context.DBUtilisateur.FirstOrDefault(u => u.Email == savedEmail);
+                var user = context.DBUtilisateur.FirstOrDefault(u => u.Email == savedLogin.Email);
                 if (user != null)
                 {
                     desktop.MainWindow = new MainWindow();
@@ -54,6 +54,7 @@ public partial class App : Application
             {
                 desktop.MainWindow = new LoginWindow(context);
             }
+
 
             if (Application.Current is not null)
             {

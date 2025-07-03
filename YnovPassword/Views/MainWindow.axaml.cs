@@ -17,20 +17,38 @@ public partial class MainWindow : Window
 {
     private PasswordContext _dbContext = new PasswordContext();
     private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
+    private ObservableCollection<TypeProfile> _typeProfiles = new ObservableCollection<TypeProfile>();
+
+
+    private readonly int _currentUserId = (int)AuthStorage.LoadLogin()?.Id;
 
     public MainWindow()
     {
         InitializeComponent();
-        //LoadDataFromDatabase();
+        LoadDataFromDatabase(_currentUserId);
+        LoadTypeProfiles();
 
     }
 
-
-
-    private void LoadDataFromDatabase()
+    private void LoadTypeProfiles()
     {
-        // Charger les comptes depuis la base de données
-        var accountsFromDb = _dbContext.Accounts.ToList();
+        var profiles = _dbContext.TypeProfiles.ToList();
+        _typeProfiles.Clear();
+
+        _typeProfiles.Add(new TypeProfile { Id = 0, Name = "Tous" });
+
+        foreach (var p in profiles)
+            _typeProfiles.Add(p);
+
+        cbTypeProfileFilter.ItemsSource = _typeProfiles;
+        cbTypeProfileFilter.SelectedIndex = 0;
+    }
+
+    private void LoadDataFromDatabase(int currentUserId)
+    {
+        var accountsFromDb = _dbContext.Accounts
+                                      .Where(a => a.UtilisateurId == currentUserId)
+                                      .ToList();
 
         // Mettre à jour la collection
         _accounts.Clear();
@@ -63,40 +81,65 @@ public partial class MainWindow : Window
             // Si des modifications ont été apportées, recharger les données
             if (detailsWindow.IsSaved)
             {
-                LoadDataFromDatabase();
+                LoadDataFromDatabase(_currentUserId);
             }
         }
     }
 
-    /// <summary>
-    /// Fonction pour rechercher des comptes en fonction du texte saisi dans le champ de recherche.
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+
     private void TxtRecherche_TextChanged(object sender, TextChangedEventArgs e)
     {
-        // Filtrer les comptes en fonction du texte de recherche
-        string searchText = txtRecherche.Text?.ToLower() ?? string.Empty;
+        ApplyFilters();
+    }
 
-        if (string.IsNullOrWhiteSpace(searchText))
+    private void CbTypeProfileFilter_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        ApplyFilters();
+    }
+
+
+    private async void BtnAddTypeProfile_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new AddTypeProfileWindow();
+        var result = await dialog.ShowDialog<string?>(this);
+        if (!string.IsNullOrEmpty(result))
         {
-            // Si la recherche est vide, afficher tous les comptes
-            lstAccounts.ItemsSource = _accounts;
-            txtCompteTotal.Text = _accounts.Count.ToString();
-            return;
+            LoadTypeProfiles();
+            cbTypeProfileFilter.SelectedItem = _dbContext.TypeProfiles.FirstOrDefault(tp => tp.Name == result);
         }
 
-        // Filtrer les comptes
-        var filteredAccounts = _accounts.Where(a =>
-            a.Name.ToLower().Contains(searchText) ||
-            a.URL.ToLower().Contains(searchText) ||
-            a.TypeProfile.ToLower().Contains(searchText) ||
-            a.Login.ToLower().Contains(searchText)
-        ).ToList();
-
-        lstAccounts.ItemsSource = filteredAccounts;
-        txtCompteTotal.Text = filteredAccounts.Count.ToString();
     }
+
+
+
+    private void ApplyFilters()
+    {
+        string searchText = txtRecherche.Text?.ToLower() ?? string.Empty;
+
+        var selectedTypeProfile = cbTypeProfileFilter.SelectedItem as TypeProfile;
+        int selectedTypeId = selectedTypeProfile?.Id ?? 0;
+
+        IEnumerable<Account> filtered = _accounts;
+
+        if (!string.IsNullOrWhiteSpace(searchText))
+        {
+            filtered = filtered.Where(a =>
+                a.Name.ToLower().Contains(searchText) ||
+                a.URL.ToLower().Contains(searchText) ||
+                a.Login.ToLower().Contains(searchText));
+        }
+
+        if (selectedTypeId != 0) // Assuming Id=0 means "All"
+        {
+            filtered = filtered.Where(a => a.TypeProfileId == selectedTypeId);
+        }
+
+        var filteredList = filtered.ToList();
+
+        lstAccounts.ItemsSource = filteredList;
+        txtCompteTotal.Text = filteredList.Count.ToString();
+    }
+
 
     private async void BtnAjouterCompte_Click(object sender, RoutedEventArgs e)
     {
@@ -109,10 +152,9 @@ public partial class MainWindow : Window
         // Si un nouveau compte a été ajouté, recharger les données
         if (newAccountWindow.IsSaved)
         {
-            LoadDataFromDatabase();
+            LoadDataFromDatabase(_currentUserId);
         }
     }
-
 
 
     private void ShowMessageInPopup(string message)
@@ -135,6 +177,11 @@ public partial class MainWindow : Window
         this.Close();
     }
 
+
+    private void PDF_Click(object? sender, RoutedEventArgs e)
+    {
+        // do later
+    }
 
     private async void BtnImport_Click(object? sender, RoutedEventArgs e)
     {
@@ -216,7 +263,7 @@ public partial class MainWindow : Window
 
             if (detailsWindow.IsSaved)
             {
-                LoadDataFromDatabase();
+                LoadDataFromDatabase(_currentUserId);
             }
         }
     }
@@ -232,7 +279,7 @@ public partial class MainWindow : Window
             {
                 _dbContext.Accounts.Remove(account);
                 await _dbContext.SaveChangesAsync();
-                LoadDataFromDatabase();
+                LoadDataFromDatabase(_currentUserId);
             }
 
         }

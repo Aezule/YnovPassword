@@ -1,7 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using YnovPassword.Modele;
 
 namespace YnovPassword.Views
@@ -11,6 +14,7 @@ namespace YnovPassword.Views
         readonly private Account _account;
         readonly private PasswordContext _dbContext;
         readonly private bool _isNewAccount;
+        private readonly int _currentUserId = (int)AuthStorage.LoadLogin()?.Id;
 
         public bool IsSaved { get; private set; }
 
@@ -21,6 +25,7 @@ namespace YnovPassword.Views
             _isNewAccount = true;
             _account = new Account();
             IsSaved = false;
+            LoadTypeProfilesAsync();
         }
 
         public AccountDetailsWindow(Account account)
@@ -34,23 +39,54 @@ namespace YnovPassword.Views
             // Remplir les champs avec les données du compte
             LoadAccountData();
         }
+        private async Task LoadTypeProfilesAsync()
+        {
+            var profiles = await _dbContext.TypeProfiles.ToListAsync();
+            cbTypeProfile.ItemsSource = profiles;
+
+            var selected = profiles.FirstOrDefault(p => p.Id == _account.TypeProfileId);
+            cbTypeProfile.SelectedItem = selected;
+        }
 
         private void LoadAccountData()
         {
+
             txtName.Text = _account.Name;
-            txtTypeProfile.Text = _account.TypeProfile;
             txtUrl.Text = _account.URL;
             txtLogin.Text = _account.Login;
-            txtPassword.Text = _account.Password;
+            txtPassword.Text = PasswordHelper.Decrypt(_account.Password);
+            LoadTypeProfilesAsync();
         }
 
         private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             _account.Name = txtName.Text;
-            _account.TypeProfile = txtTypeProfile.Text;
+
+            if (cbTypeProfile.SelectedItem is TypeProfile selectedProfile)
+            {
+                var trackedProfile = await _dbContext.TypeProfiles.FindAsync(selectedProfile.Id);
+                if (trackedProfile != null)
+                {
+                    _account.TypeProfile = trackedProfile;
+                    _account.TypeProfileId = trackedProfile.Id;
+                }
+                else
+                {
+                    _account.TypeProfile = null!;
+                    _account.TypeProfileId = 0;
+                }
+            }
+            else
+            {
+                _account.TypeProfile = null!;
+                _account.TypeProfileId = 0;
+            }
+
             _account.URL = txtUrl.Text;
             _account.Login = txtLogin.Text;
-            _account.Password = txtPassword.Text;
+            _account.Password = _account.Password = PasswordHelper.Encrypt(txtPassword.Text);
+
+            _account.UtilisateurId = _currentUserId;
 
             if (_isNewAccount)
             {
@@ -65,6 +101,10 @@ namespace YnovPassword.Views
             IsSaved = true;
             Close();
         }
+
+
+
+
 
 
         private void OnGeneratePasswordClicked(object sender, RoutedEventArgs e)

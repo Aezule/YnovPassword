@@ -37,6 +37,8 @@ namespace YnovPassword.Modele
 
         public DbSet<Dictionnaire> Dictionnaires { get; set; } = null!;
 
+        public DbSet<TypeProfile> TypeProfiles { get; set; } = null!;
+
 
         public static void GetInExceptionErrorLog(Exception ex)
         {
@@ -82,6 +84,12 @@ namespace YnovPassword.Modele
                     Email = ConstantHelper.Email,
                     MotDePasse = hashedPassword
                 }
+            );
+
+
+            modelBuilder.Entity<TypeProfile>().HasData(
+                new TypeProfile { Id = 1, Name = "Netflix" },
+                new TypeProfile { Id = 2, Name = "Discord" }
             );
 
         }

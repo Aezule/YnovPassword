@@ -21,7 +21,6 @@ public partial class SignIn : Window
 
     private async void btnSignIn_Click(object? sender, RoutedEventArgs e)
     {
-        // Réinitialise tous les messages d'erreur
         txtErrorMessageEmail.Text = "";
         txtErrorMessagePassword.Text = "";
         txtErrorMessageConfirmPassword.Text = "";
@@ -60,7 +59,7 @@ public partial class SignIn : Window
             var newUser = new DBUtilisateur(nom, prenom, email, passwordEncrypted);
             _context.DBUtilisateur.Add(newUser);
             await _context.SaveChangesAsync();
-            AuthStorage.SaveLogin(email);
+
 
             var mainWindow = new MainWindow();
             mainWindow.Show();

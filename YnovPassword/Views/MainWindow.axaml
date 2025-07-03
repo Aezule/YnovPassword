@@ -43,16 +43,30 @@
                 </Border>
             </Popup>
 
-            <TextBox x:Name="txtRecherche"
-                     Classes="outline"
-                     Watermark="Recherchez un nom, email, type"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     Width="300"
-                     Text=""
-                     TextWrapping="Wrap"
-                     TextChanged="TxtRecherche_TextChanged"
-                     Grid.Column="0" />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0" Margin="10 0 10 0">
+                <TextBox x:Name="txtRecherche"
+                         Classes="outline"
+                         Watermark="Recherchez un nom, email, type"
+                         Width="300"
+                         TextWrapping="Wrap"
+                         TextChanged="TxtRecherche_TextChanged" />
+
+                <ComboBox x:Name="cbTypeProfileFilter"
+                          Width="150"
+                          Margin="10 0 0 0"
+                          SelectionChanged="CbTypeProfileFilter_SelectionChanged"
+                           />
+
+                <Button x:Name="txtType"
+                    Content="+"
+                    Classes="accent"
+                    Click="BtnAddTypeProfile_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="5 0 0 0"
+                    Grid.Column="4" />
+
+            </StackPanel>
 
             <Button x:Name="btnLogOff"
                     Content="Déconnexion"
@@ -75,6 +89,7 @@
             <Button x:Name="txtInfo"
                     Content="?"
                     Classes="accent"
+                    Click="PDF_Click"
                     ToolTip.Tip="Aide et informations"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"

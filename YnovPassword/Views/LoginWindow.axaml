@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
         x:Class="YnovPassword.LoginWindow"
-        Height="300" Width="450"
+        Height="300" Width="600"
         Title="Connexion">
 
 
@@ -30,6 +30,10 @@
             <StackPanel>
                 <TextBlock Text="Mot de passe" Margin="0,0,0,5"/>
                 <TextBox x:Name="txtPassword"  PasswordChar="●"/>
+            </StackPanel>
+
+            <StackPanel Margin="20">
+                <CheckBox x:Name="SaveMe">Se souvenir de moi</CheckBox>
             </StackPanel>
         </StackPanel>
 

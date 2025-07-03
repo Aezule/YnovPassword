@@ -31,11 +31,18 @@ public partial class LoginWindow : Window
 
         if (user != null)
         {
-
-            AuthStorage.SaveLogin(user.Email);
+            if (SaveMe.IsChecked == true)
+            {
+                AuthStorage.SaveLogin(user.Id, user.Email);
+            }
+            else
+            {
+                AuthStorage.SaveLogin(user.Id, string.Empty);
+            }
             var mainWindow = new MainWindow();
             mainWindow.Show();
             Close();
+
         }
         else
         {
