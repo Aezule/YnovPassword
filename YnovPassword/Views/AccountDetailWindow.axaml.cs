@@ -18,6 +18,8 @@ namespace YnovPassword.Views
 
         public bool IsSaved { get; private set; }
 
+
+
         public AccountDetailsWindow()
         {
             InitializeComponent();
@@ -25,27 +27,23 @@ namespace YnovPassword.Views
             _isNewAccount = true;
             _account = new Account();
             IsSaved = false;
+
+            SetupSlider();
             LoadTypeProfilesAsync();
         }
 
         public AccountDetailsWindow(Account account)
         {
             InitializeComponent();
+
+            SetupSlider();
+
             _dbContext = new PasswordContext();
             _account = account;
             _isNewAccount = false;
             IsSaved = false;
 
-            // Remplir les champs avec les données du compte
             LoadAccountData();
-        }
-        private async Task LoadTypeProfilesAsync()
-        {
-            var profiles = await _dbContext.TypeProfiles.ToListAsync();
-            cbTypeProfile.ItemsSource = profiles;
-
-            var selected = profiles.FirstOrDefault(p => p.Id == _account.TypeProfileId);
-            cbTypeProfile.SelectedItem = selected;
         }
 
         private void LoadAccountData()
@@ -58,8 +56,72 @@ namespace YnovPassword.Views
             LoadTypeProfilesAsync();
         }
 
+        private void SetupSlider()
+        {
+            sliderWordCount.PropertyChanged += (s, e) =>
+            {
+                if (e.Property.Name == nameof(sliderWordCount.Value))
+                    txtWordCount.Text = sliderWordCount.Value.ToString("0");
+            };
+            txtWordCount.Text = sliderWordCount.Value.ToString("0");
+        }
+
+        private async Task LoadTypeProfilesAsync()
+        {
+            var profiles = await _dbContext.TypeProfiles.ToListAsync();
+            cbTypeProfile.ItemsSource = profiles;
+
+            var selected = profiles.FirstOrDefault(p => p.Id == _account.TypeProfileId);
+            cbTypeProfile.SelectedItem = selected;
+        }
+
+        private async Task ShowMessage(string message)
+        {
+            var dialog = new Window
+            {
+                Width = 300,
+                Height = 100,
+                Title = "Erreur",
+                Content = new TextBlock
+                {
+                    Text = message,
+                    VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center
+                }
+            };
+
+            await dialog.ShowDialog(this);
+        }
+
         private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+
+
+            if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                await ShowMessage("Le nom est requis.");
+                return;
+            }
+
+            if (cbTypeProfile.SelectedItem == null)
+            {
+                await ShowMessage("Veuillez sélectionner un type de profil.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtLogin.Text))
+            {
+                await ShowMessage("L'identifiant est requis.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                await ShowMessage("Le mot de passe est requis.");
+                return;
+            }
+
+
             _account.Name = txtName.Text;
 
             if (cbTypeProfile.SelectedItem is TypeProfile selectedProfile)
@@ -107,23 +169,29 @@ namespace YnovPassword.Views
 
 
 
-        private void OnGeneratePasswordClicked(object sender, RoutedEventArgs e)
+        private async void OnGeneratePasswordClicked(object sender, RoutedEventArgs e)
         {
-            string generatedPassword = GenerateStrongPassword(24);
+            int wordCount = (int)sliderWordCount.Value;
+            string generatedPassword = await GeneratePasswordFromDictionaryAsync(wordCount);
             txtPassword.Text = generatedPassword;
         }
 
-        private static string GenerateStrongPassword(int length)
+        private async Task<string> GeneratePasswordFromDictionaryAsync(int wordCount)
         {
-            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+";
-            var res = new char[length];
-            var rnd = new Random();
+            var allWords = await _dbContext.Dictionnaires.Select(d => d.Mot).ToListAsync();
 
-            for (int i = 0; i < length; i++)
+            if (allWords.Count == 0)
+                return string.Empty;
+
+            var rnd = new Random();
+            var selectedWords = new string[wordCount];
+
+            for (int i = 0; i < wordCount; i++)
             {
-                res[i] = valid[rnd.Next(valid.Length)];
+                selectedWords[i] = allWords[rnd.Next(allWords.Count)];
             }
-            return new string(res);
+
+            return string.Join("-", selectedWords);
         }
 
         private void OnEditPasswordClicked(object sender, RoutedEventArgs e)

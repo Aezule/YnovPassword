@@ -14,16 +14,18 @@ namespace YnovPassword.Modele
         {
             public int Id { get; set; }
             public string Email { get; set; } = "";
+
+            public bool IsAdmin { get; set; } = false;
         }
 
         private static string FilePath => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "MyApp", "login.json");
 
-        public static void SaveLogin(int Id, string email)
+        public static void SaveLogin(int Id, string email, bool isAdmin)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
-            var json = JsonSerializer.Serialize(new { Id = Id, Email = email });
+            var json = JsonSerializer.Serialize(new { Id = Id, Email = email, IsAdmin = isAdmin });
             File.WriteAllText(FilePath, json);
         }
 

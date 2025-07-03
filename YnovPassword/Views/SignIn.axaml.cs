@@ -60,6 +60,8 @@ public partial class SignIn : Window
             _context.DBUtilisateur.Add(newUser);
             await _context.SaveChangesAsync();
 
+            AuthStorage.SaveLogin(newUser.Id, string.Empty, newUser.IsAdmin);
+
 
             var mainWindow = new MainWindow();
             mainWindow.Show();

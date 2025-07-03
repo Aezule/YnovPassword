@@ -82,15 +82,26 @@ namespace YnovPassword.Modele
                     Nom = ConstantHelper.Nom,
                     Prenom = ConstantHelper.Prenom,
                     Email = ConstantHelper.Email,
-                    MotDePasse = hashedPassword
+                    MotDePasse = hashedPassword,
+                    IsAdmin = true
                 }
             );
 
+            for (int i = 1; i < ConstantHelper.TypeProfileList.Count; i++)
+            {
+                modelBuilder.Entity<TypeProfile>().HasData(
+                    new TypeProfile { Id = i + 1, Name = ConstantHelper.TypeProfileList[i] }
+                );
+            }
 
-            modelBuilder.Entity<TypeProfile>().HasData(
-                new TypeProfile { Id = 1, Name = "Netflix" },
-                new TypeProfile { Id = 2, Name = "Discord" }
-            );
+            for (int i = 1; i < ConstantHelper.MotDictionnaire.Count; i++)
+            {
+                modelBuilder.Entity<Dictionnaire>().HasData(
+                    new Dictionnaire { Id = i + 1, Mot = ConstantHelper.MotDictionnaire[i] }
+                );
+            }
+
+
 
         }
 

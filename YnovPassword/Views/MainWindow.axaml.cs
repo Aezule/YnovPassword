@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using YnovPassword.Modele;
 
 
@@ -22,10 +23,12 @@ public partial class MainWindow : Window
 
     private readonly int _currentUserId = (int)AuthStorage.LoadLogin()?.Id;
 
+    private readonly bool _isAdmin = AuthStorage.LoadLogin()?.IsAdmin ?? false;
+
     public MainWindow()
     {
         InitializeComponent();
-        LoadDataFromDatabase(_currentUserId);
+        LoadDataFromDatabase(_currentUserId, _isAdmin);
         LoadTypeProfiles();
 
     }
@@ -44,25 +47,32 @@ public partial class MainWindow : Window
         cbTypeProfileFilter.SelectedIndex = 0;
     }
 
-    private void LoadDataFromDatabase(int currentUserId)
+    private void LoadDataFromDatabase(int currentUserId, bool isAdmin)
     {
-        var accountsFromDb = _dbContext.Accounts
-                                      .Where(a => a.UtilisateurId == currentUserId)
-                                      .ToList();
+        IQueryable<Account> query;
 
-        // Mettre à jour la collection
+        if (isAdmin)
+        {
+            query = _dbContext.Accounts;
+        }
+        else
+        {
+            query = _dbContext.Accounts.Where(a => a.UtilisateurId == currentUserId);
+        }
+
+        var accountsFromDb = query.ToList();
+
         _accounts.Clear();
         foreach (var account in accountsFromDb)
         {
             _accounts.Add(account);
         }
 
-        // Assigner la collection au ItemsSource de l'ItemsControl
         lstAccounts.ItemsSource = _accounts;
 
-        // Mettre à jour le compteur
         txtCompteTotal.Text = _accounts.Count.ToString();
     }
+
 
     /// <summary>
     /// Fonction pour ouvrir la page d'information et de modification d'un compte lorsque l'utilisateur clique dessus.
@@ -78,10 +88,9 @@ public partial class MainWindow : Window
 
             await detailsWindow.ShowDialog(this);
 
-            // Si des modifications ont été apportées, recharger les données
             if (detailsWindow.IsSaved)
             {
-                LoadDataFromDatabase(_currentUserId);
+                LoadDataFromDatabase(_currentUserId, _isAdmin);
             }
         }
     }
@@ -152,7 +161,7 @@ public partial class MainWindow : Window
         // Si un nouveau compte a été ajouté, recharger les données
         if (newAccountWindow.IsSaved)
         {
-            LoadDataFromDatabase(_currentUserId);
+            LoadDataFromDatabase(_currentUserId, _isAdmin);
         }
     }
 
@@ -263,7 +272,7 @@ public partial class MainWindow : Window
 
             if (detailsWindow.IsSaved)
             {
-                LoadDataFromDatabase(_currentUserId);
+                LoadDataFromDatabase(_currentUserId, _isAdmin);
             }
         }
     }
@@ -279,7 +288,7 @@ public partial class MainWindow : Window
             {
                 _dbContext.Accounts.Remove(account);
                 await _dbContext.SaveChangesAsync();
-                LoadDataFromDatabase(_currentUserId);
+                LoadDataFromDatabase(_currentUserId, _isAdmin);
             }
 
         }
@@ -289,7 +298,7 @@ public partial class MainWindow : Window
     {
         if (sender is Button button && button.DataContext is Account account)
         {
-            var passwordToCopy = account.Password;
+            var passwordToCopy = PasswordHelper.Decrypt(account.Password);
 
             await this.Clipboard.SetTextAsync(passwordToCopy);
         }

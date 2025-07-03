@@ -33,11 +33,11 @@ public partial class LoginWindow : Window
         {
             if (SaveMe.IsChecked == true)
             {
-                AuthStorage.SaveLogin(user.Id, user.Email);
+                AuthStorage.SaveLogin(user.Id, user.Email, user.IsAdmin);
             }
             else
             {
-                AuthStorage.SaveLogin(user.Id, string.Empty);
+                AuthStorage.SaveLogin(user.Id, string.Empty, user.IsAdmin);
             }
             var mainWindow = new MainWindow();
             mainWindow.Show();

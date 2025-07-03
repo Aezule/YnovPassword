@@ -22,26 +22,32 @@ public partial class AddTypeProfileWindow : Window
     {
         var result = txtNewTypeProfile.Text?.Trim();
 
+
         if (string.IsNullOrWhiteSpace(result))
         {
             Close(null);
             return;
-        }
-        var existing = _dbContext.TypeProfiles.FirstOrDefault(tp => tp.Name == result);
-
-        if (existing == null)
+        }else
         {
-            var newProfile = new TypeProfile { Name = result };
-            _dbContext.TypeProfiles.Add(newProfile);
-            await _dbContext.SaveChangesAsync();
-            NewTypeProfileName = result;
-        }
-        else
-        {
-            NewTypeProfileName = existing.Name;
+            var existing = _dbContext.TypeProfiles.FirstOrDefault(tp => tp.Name == result);
+
+            if (existing == null)
+            {
+                var newProfile = new TypeProfile { Name = result };
+                _dbContext.TypeProfiles.Add(newProfile);
+                await _dbContext.SaveChangesAsync();
+                NewTypeProfileName = result;
+            }
+            else
+            {
+                NewTypeProfileName = existing.Name;
+
+            }
+            Close(NewTypeProfileName);
+
         }
 
-        Close(NewTypeProfileName);
+
     }
 
 

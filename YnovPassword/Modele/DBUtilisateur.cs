@@ -16,6 +16,7 @@ namespace YnovPassword.Modele
         public string Email { get; set; }
         public string MotDePasse { get; set; }
 
+        public bool IsAdmin { get; set; } = false;
         // Navigation property (one-to-many)
         public ICollection<Account> Accounts { get; set; } = new List<Account>();
 
