@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YnovPassword.Modele;
 using YnovPassword.utils;
+using System.Diagnostics;
 
 namespace YnovPassword.Views;
 
@@ -245,7 +246,16 @@ public partial class MainWindow : Window
 
     private void PDF_Click(object? sender, RoutedEventArgs e)
     {
-        // do later
+        var helpFile = Path.Combine(AppContext.BaseDirectory, "Help", "index.html");
+
+        var psi = new ProcessStartInfo
+        {
+            FileName = helpFile,
+            UseShellExecute = true
+        };
+        Process.Start(psi);
+
+
     }
 
     private async void BtnImport_Click(object? sender, RoutedEventArgs e)
