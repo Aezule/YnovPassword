@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YnovPassword - Documentation des Fonctionnalités</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+
+        .feature-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .tech-item {
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .security-highlight {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .security-highlight h4 {
+            color: #2e7d32;
+            margin: 0 0 10px 0;
+        }
+
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .toc li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+
+        .toc a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+
+        .author-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔐 YnovPassword - Gestionnaire de Mots de Passe</h1>
+
+        <div class="toc">
+            <h3>Table des Matières</h3>
+            <ul>
+                <li><a href="#overview">Vue d'ensemble</a></li>
+                <li><a href="#tech-stack">Technologies utilisées</a></li>
+                <li><a href="#features">Fonctionnalités principales</a></li>
+                <li><a href="#security">Sécurité</a></li>
+                <li><a href="#database">Base de données</a></li>
+                <li><a href="#installation">Installation et utilisation</a></li>
+                <li><a href="#author">Informations sur l'auteur</a></li>
+            </ul>
+        </div>
+
+        <section id="overview">
+            <h2>📋 Vue d'ensemble</h2>
+            <p>YnovPassword est une application de gestion de mots de passe moderne développée avec Avalonia UI et .NET
+                8. Elle permet aux utilisateurs de stocker, gérer et sécuriser leurs mots de passe de manière locale
+                avec un chiffrement robuste.</p>
+
+            <div class="highlight">
+                <strong>Objectif principal :</strong> Offrir une solution sécurisée et intuitive pour la gestion des
+                mots de passe avec des fonctionnalités avancées de génération et de vérification de la sécurité.
+            </div>
+        </section>
+
+        <section id="tech-stack">
+            <h2>🛠️ Technologies utilisées</h2>
+            <div class="tech-stack">
+                <span class="tech-item">.NET 8</span>
+                <span class="tech-item">Avalonia UI 11.3.2</span>
+                <span class="tech-item">Entity Framework Core 9.0.6</span>
+                <span class="tech-item">SQLite</span>
+                <span class="tech-item">AES Encryption</span>
+                <span class="tech-item">SHA256 Hashing</span>
+                <span class="tech-item">Keccak-512</span>
+                <span class="tech-item">BouncyCastle</span>
+                <span class="tech-item">HashLib</span>
+                <span class="tech-item">Newtonsoft.Json</span>
+            </div>
+        </section>
+
+        <section id="features">
+            <h2>✨ Fonctionnalités principales</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-title">Gestion des Comptes</div>
+                    <div class="feature-description">
+                        Stockage sécurisé des informations de connexion avec nom, URL, identifiant et mot de passe
+                        chiffrés.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <div class="feature-title">Authentification Utilisateur</div>
+                    <div class="feature-description">
+                        Système de connexion sécurisé avec hashage SHA256 et option "Se souvenir de moi".
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <div class="feature-title">Types de Profils</div>
+                    <div class="feature-description">
+                        Catégorisation des comptes par type (Netflix, Google, Facebook, etc.) avec possibilité d'ajout
+                        personnalisé.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Recherche et Filtrage</div>
+                    <div class="feature-description">
+                        Recherche en temps réel par nom, URL ou identifiant avec filtrage par type de profil.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎲</div>
+                    <div class="feature-title">Génération de Mots de Passe</div>
+                    <div class="feature-description">
+                        Génération automatique de mots de passe basée sur un dictionnaire français avec contrôle du
+                        nombre de mots.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">Vérification de Sécurité</div>
+                    <div class="feature-description">
+                        Vérification des mots de passe exposés via l'API XposedOrNot avec hashage Keccak-512.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <div class="feature-title">Import/Export</div>
+                    <div class="feature-description">
+                        Importation de dictionnaires de mots depuis des fichiers CSV pour la génération de mots de
+                        passe.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-title">Copie Sécurisée</div>
+                    <div class="feature-description">
+                        Copie des mots de passe dans le presse-papiers avec déchiffrement automatique.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👑</div>
+                    <div class="feature-title">Gestion Administrateur</div>
+                    <div class="feature-description">
+                        Mode administrateur permettant de voir tous les comptes de tous les utilisateurs.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">Interface Moderne</div>
+                    <div class="feature-description">
+                        Interface utilisateur moderne avec thème Kawaii et design intuitif.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="security">
+            <h2>🔒 Sécurité</h2>
+
+            <div class="security-highlight">
+                <h4>🛡️ Chiffrement AES</h4>
+                <p>Tous les mots de passe sont chiffrés avec AES-256 avant d'être stockés dans la base de données. Une
+                    clé et un vecteur d'initialisation fixes sont utilisés pour le chiffrement/déchiffrement.</p>
+            </div>
+
+            <div class="security-highlight">
+                <h4>🔐 Hashage SHA256</h4>
+                <p>Les mots de passe des utilisateurs sont hashés avec SHA256 avant d'être stockés, garantissant qu'ils
+                    ne peuvent pas être récupérés en cas de compromission de la base de données.</p>
+            </div>
+
+            <div class="security-highlight">
+                <h4>🌐 Vérification de Sécurité</h4>
+                <p>L'application utilise l'API XposedOrNot pour vérifier si les mots de passe ont été exposés dans des
+                    fuites de données. Le hashage Keccak-512 est utilisé pour préserver la confidentialité lors de la
+                    vérification.</p>
+            </div>
+
+            <div class="warning">
+                <strong>Note de sécurité :</strong> La clé de chiffrement est codée en dur dans l'application. Pour un
+                environnement de production, il serait recommandé d'utiliser un système de gestion des clés plus
+                sécurisé.
+            </div>
+        </section>
+
+        <section id="database">
+            <h2>💾 Base de données</h2>
+
+            <h3>Structure des tables</h3>
+            <ul>
+                <li><strong>DBUtilisateur</strong> : Informations des utilisateurs (nom, prénom, email, mot de passe
+                    hashé)</li>
+                <li><strong>Account</strong> : Comptes stockés (nom, URL, identifiant, mot de passe chiffré)</li>
+                <li><strong>TypeProfile</strong> : Types de profils prédéfinis (Netflix, Google, etc.)</li>
+                <li><strong>Dictionnaire</strong> : Mots utilisés pour la génération de mots de passe</li>
+            </ul>
+
+            <h3>Migrations</h3>
+            <p>Le projet utilise Entity Framework Core avec plusieurs migrations pour l'évolution du schéma de base de
+                données :</p>
+            <ul>
+                <li><code>InitialMigration</code> : Structure initiale</li>
+                <li><code>1.0</code> : Ajout des dictionnaires</li>
+                <li><code>1.1</code> : Modification des types de profils</li>
+                <li><code>1.2</code> à <code>1.5</code> : Améliorations progressives</li>
+            </ul>
+
+            <h3>Données par défaut</h3>
+            <p>L'application inclut des données par défaut :</p>
+            <ul>
+                <li>Utilisateur administrateur (Robert DeMadrido)</li>
+                <li>Types de profils prédéfinis (Netflix, Amazon, Google, etc.)</li>
+                <li>Dictionnaire français pour la génération de mots de passe</li>
+            </ul>
+        </section>
+
+        <section id="installation">
+            <h2>⚙️ Installation et utilisation</h2>
+
+            <h3>Prérequis</h3>
+            <ul>
+                <li>.NET 8 SDK</li>
+                <li>Visual Studio 2022 ou VS Code</li>
+                <li>SQLite (inclus avec Entity Framework Core)</li>
+            </ul>
+
+            <h3>Compilation</h3>
+            <div class="highlight">
+                <code>dotnet build</code><br>
+                <code>dotnet run</code>
+            </div>
+
+            <h3>Première utilisation</h3>
+            <ol>
+                <li>Lancez l'application</li>
+                <li>Connectez-vous avec le compte par défaut (Robert / YnovPassword)</li>
+                <li>Ou créez un nouveau compte via le bouton "Créer un compte"</li>
+                <li>Commencez à ajouter vos comptes via le bouton "+"</li>
+            </ol>
+
+            <h3>Fonctionnalités clés</h3>
+            <ul>
+                <li><strong>Ajout de compte</strong> : Cliquez sur "Ajouter un compte" pour ajouter un nouveau compte</li>
+                <li><strong>Ajout de type de profile</strong> : Cliquez sur "+" pour ajouter un type de profile</li>
+                <li><strong>Génération de mot de passe</strong> : Utilisez le slider pour choisir le nombre de mots</li>
+                <li><strong>Vérification de sécurité</strong> : Bouton "Pwned" pour vérifier les mots de passe exposés
+                </li>
+                <li><strong>Import de dictionnaire</strong> : Importez vos propres mots depuis un fichier CSV</li>
+                <li><strong>Recherche</strong> : Utilisez la barre de recherche pour trouver rapidement un compte</li>
+            </ul>
+        </section>
+
+        <div class="author-info">
+            <h2 id="author">👨‍💻 Informations sur l'auteur</h2>
+            <p><strong>Projet :</strong> YnovPassword - Gestionnaire de Mots de Passe</p>
+            <p><strong>Développé avec :</strong> Avalonia UI, .NET 8, Entity Framework Core</p>
+            <p><strong>Fonctionnalités :</strong> Chiffrement AES, Vérification de sécurité, Interface moderne</p>
+            <p><strong>Base de données :</strong> SQLite avec Entity Framework Core</p>
+        </div>
+    </div>
+</body>
+
+</html>

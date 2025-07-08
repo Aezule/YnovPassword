@@ -1,0 +1,64 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
+        Width="800" Height="700"
+        x:Class="YnovPassword.SignIn"
+        Title="SignIn">
+
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Titre -->
+        <TextBlock Grid.Row="0" Text="Connexion à votre compte"
+                   FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <!-- Formulaire de connexion -->
+        <StackPanel Grid.Row="1" Spacing="15">
+
+            <StackPanel>
+                <TextBlock Text="Nom" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtNom" />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Prénom" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtPrenom" />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Email" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtEmail" />
+                <TextBlock x:Name="txtErrorMessageEmail" Foreground="Red" FontWeight="Bold" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Mot de passe" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtPassword"  PasswordChar="●"/>
+                <TextBlock x:Name="txtErrorMessagePassword" Foreground="Red" FontWeight="Bold" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Confirmation mot de passe" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtConfirmPassword"  PasswordChar="●"/>
+                <TextBlock x:Name="txtErrorMessageConfirmPassword" Foreground="Red" FontWeight="Bold" TextWrapping="Wrap" />
+            </StackPanel>
+            <TextBlock x:Name="txtErrorMessageAll" Foreground="Red" FontWeight="Bold" TextWrapping="Wrap" />
+
+        </StackPanel>
+
+
+
+        <!-- Boutons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,20,0,0">
+            <Button x:Name="btnLogin" Content="S'enregistrer" Classes="accent" Click="btnSignIn_Click"/>
+            <Button x:Name="btnCancel" Content="Annuler" Classes="accent" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

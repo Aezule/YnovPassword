@@ -1,12 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <Design.PreviewWith>
-        <Border Padding="20">
+        <Border Padding="20" Background="#FF2B004B">
             <StackPanel Spacing="10">
                 <Button Content="Bouton Standard"/>
                 <Button Classes="accent" Content="Bouton Accent"/>
                 <Button Classes="outline" Content="Bouton Outline"/>
-                <TextBox Watermark="Saisissez du texte"/>
+                <TextBox Watermark="Saisissez du texte kawaii ✨"/>
                 <DataGrid Height="100">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Colonne 1"/>
@@ -17,59 +18,67 @@
         </Border>
     </Design.PreviewWith>
 
-    <!-- Définitions des couleurs principales -->
     <Styles.Resources>
-        <Color x:Key="PrimaryColor">#2962FF</Color>
-        <Color x:Key="PrimaryDarkColor">#0039CB</Color>
-        <Color x:Key="PrimaryLightColor">#768FFF</Color>
-        <Color x:Key="AccentColor">#FF3D00</Color>
-        <Color x:Key="TextColor">#212121</Color>
-        <Color x:Key="BackgroundColor">#FFFFFF</Color>
-        <Color x:Key="BorderColor">#DDDDDD</Color>
+        <Color x:Key="PrimaryColor">#9B59B6</Color>
+        <!-- Améthyste moyen -->
+        <Color x:Key="PrimaryDarkColor">#6C3483</Color>
+        <!-- Violet foncé -->
+        <Color x:Key="PrimaryLightColor">#BB8FCE</Color>
+        <!-- Lavande claire -->
+        <Color x:Key="AccentColor">#8E44AD</Color>
+        <!-- Violet vibrant -->
+        <Color x:Key="TextColor">#E0C3FC</Color>
+        <!-- Lavande très clair -->
+        <Color x:Key="BackgroundColor">#2B004B</Color>
+        <!-- Violet très foncé -->
+        <Color x:Key="BorderColor">#4A235A</Color>
+        <!-- Violet foncé/transparent -->
     </Styles.Resources>
 
-    <!-- Style général de la fenêtre -->
     <Style Selector="Window">
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
-        <Setter Property="FontFamily" Value="Inter, Segoe UI, San Francisco, sans-serif"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter, sans-serif"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
     </Style>
 
     <Style Selector="TextBox">
-        <Setter Property="Background" Value="#FFF9FAFB"/>
-        <!-- very light gray -->
+        <Setter Property="Background" Value="#3B1A6B"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
-        <Setter Property="BorderBrush" Value="#FFC0C5CC"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="BorderBrush" Value="#6C3483"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Padding" Value="10 8"/>
-        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="FontSize" Value="15"/>
     </Style>
 
-    <Style Selector="TextBox:pointerover">
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightColor}"/>
-        <Setter Property="Background" Value="#FFF0F4FF"/>
-        <!-- subtle blue tint -->
-    </Style>
-
     <Style Selector="TextBox:focus">
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryColor}"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightColor}"/>
+        <Setter Property="Background" Value="#6C3483"/>
     </Style>
 
-
-    <!-- Style de base pour les boutons -->
     <Style Selector="Button">
         <Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryColor}"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Padding" Value="16 8"/>
-        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="Padding" Value="16 10"/>
+        <Setter Property="CornerRadius" Value="12"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
+        <Setter Property="Effect">
+            <DropShadowEffect Color="#9959B6B6" BlurRadius="10" Opacity="0.7" />
+        </Setter>
     </Style>
+
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Segoe UI Emoji, sans-serif"/>
+        <Setter Property="Margin" Value="20"/>
+    </Style>
+
 
     <Style Selector="Button:pointerover">
         <Setter Property="Background" Value="{DynamicResource PrimaryDarkColor}"/>
@@ -77,90 +86,101 @@
     </Style>
 
     <Style Selector="Button:pressed">
-        <Setter Property="RenderTransform" Value="scale(0.98)"/>
+        <Setter Property="RenderTransform" Value="scale(0.95)"/>
     </Style>
 
-    <!-- Bouton d'accent -->
     <Style Selector="Button.accent">
         <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"/>
+        <Setter Property="Foreground" Value="White"/>
     </Style>
 
-    <!-- Bouton contour -->
     <Style Selector="Button.outline">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryColor}"/>
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentColor}"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <Style Selector="Button.outline:pointerover">
-        <Setter Property="Background" Value="#10000000"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryDarkColor}"/>
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="Background" Value="#5E258F"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryLightColor}"/>
     </Style>
 
-    <!-- Style pour les DataGrid -->
     <Style Selector="DataGrid">
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="#3B1A6B"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="4"/>
-        <Setter Property="GridLinesVisibility" Value="All"/>
+        <Setter Property="CornerRadius" Value="6"/>
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource BorderColor}"/>
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource BorderColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
     </Style>
 
     <Style Selector="TextBlock">
-        <Setter Property="Foreground" Value="#212121"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
     </Style>
 
     <Style Selector="DataGridRow:selected">
-        <Setter Property="Background" Value="#1A2962FF"/>
+        <Setter Property="Background" Value="#7D3C98"/>
     </Style>
 
     <Style Selector="DataGridRow:pointerover /template/ Rectangle#BackgroundRectangle">
-        <Setter Property="Fill" Value="#0A000000"/>
+        <Setter Property="Fill" Value="#6C3483"/>
     </Style>
 
     <Style Selector="DataGridColumnHeader">
-        <Setter Property="Background" Value="#F5F5F5"/>
+        <Setter Property="Background" Value="#4A235A"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Padding" Value="10 8"/>
     </Style>
 
-    <!-- Style additionnel pour les éléments spécifiques de votre application -->
-    <Style Selector="Button#questions">
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
-        <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"/>
-        <Setter Property="Padding" Value="4"/>
-        <Setter Property="CornerRadius" Value="16"/>
-    </Style>
-
-    <!-- Conserver le style existant pour la compatibilité -->
-    <Style Selector="Button.BoutonBleu">
-        <Setter Property="Background" Value="#2962FF"/>
-        <Setter Property="BorderBrush" Value="#2962FF"/>
-        <Setter Property="Foreground" Value="#FFFFFF"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="10"/>
-    </Style>
-    <!-- Avalonia ToolTip Style :) -->
     <Style Selector="ToolTip">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="#3B1A6B"/>
+        <Setter Property="Foreground" Value="#E0C3FC"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Padding" Value="6"/>
-        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="BorderBrush" Value="#6C3483"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
+
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="#3B1A6B"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="BorderBrush" Value="#6C3483"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="10 6"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
+    </Style>
+
+    <Style Selector="ComboBox:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryLightColor}"/>
+        <Setter Property="Background" Value="#6C3483"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="Padding" Value="8 6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Comic Sans MS, Inter"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:pointerover">
+        <Setter Property="Background" Value="#7D3C98"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:selected">
+        <Setter Property="Background" Value="{DynamicResource PrimaryDarkColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
 
 </Styles>

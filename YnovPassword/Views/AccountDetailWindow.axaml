@@ -3,14 +3,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
-        Width="800" Height="550"
+        Width="800" Height="600"
         x:Class="YnovPassword.Views.AccountDetailsWindow"
         Title="Détails du Compte"
         WindowStartupLocation="CenterOwner">
 
-    <Window.Styles>
-        <StyleInclude  Source="/Styles/kawaii.axaml"></StyleInclude>
-    </Window.Styles>
+
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -27,42 +25,54 @@
         <StackPanel Grid.Row="1" Spacing="15">
             <StackPanel>
                 <TextBlock Text="Nom" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtName" Classes="outline" Height="40"/>
+                <TextBox x:Name="txtName" />
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Type de profil" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtTypeProfile" Classes="outline" Height="40"/>
+                <ComboBox x:Name="cbTypeProfile" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="URL" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtUrl" Classes="outline" Height="40"/>
+                <TextBox x:Name="txtUrl" />
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Identifiant" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtLogin" Classes="outline" Height="40"/>
+                <TextBox x:Name="txtLogin" />
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Mot de passe" Margin="0,0,0,5"/>
-                <Grid Height="40">
-                    <TextBox x:Name="txtPassword"  Classes="outline" IsReadOnly="True" />
+                <StackPanel>
+                    <Grid Height="40">
+                        <TextBox x:Name="txtPassword" IsReadOnly="True" />
 
-                    <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Click="OnEditPasswordClicked"
-                         Background="Transparent" Margin="0,0,10,0" Padding="0" BorderThickness="0" ToolTip.Tip="Clique ici pour modifier le mot de passe" >
-                        <Path Data="M12,2 L14,4 L5,13 L3,13 L3,11 Z" Fill="Black" />
-                    </Button>
+                        <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Click="OnEditPasswordClicked"
+                            Background="Transparent" Margin="0,0,10,0" Padding="0" BorderThickness="0" ToolTip.Tip="Clique ici pour modifier le mot de passe" >
+                            <Path Data="M12,2 L14,4 L5,13 L3,13 L3,11 Z" Fill="Black" />
+                        </Button>
 
+                        <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Click="OnGeneratePasswordClicked"
+                            Background="Transparent" Margin="0,0,40,0" Padding="0" BorderThickness="0"
+                            ToolTip.Tip="Générer un mot de passe fort" >
+                            <Path Data="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z" Fill="Black" />
+                        </Button>
+                    </Grid>
 
-                    <Button Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center"
-                        Click="OnGeneratePasswordClicked"
-                                Background="Transparent" Margin="0,0,40,0" Padding="0" BorderThickness="0"
-                                    ToolTip.Tip="Générer un mot de passe fort" >
-                        <Path Data="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z" Fill="Black" />
-                        <!-- Exemple icône info (point d'exclamation dans cercle), tu peux changer le Path -->
-                    </Button>
-                </Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,0">
+                        <TextBlock Text="Nombre de mots :" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                        <Slider x:Name="sliderWordCount" Minimum="4" Maximum="10" Value="6" TickFrequency="1" IsSnapToTickEnabled="True" Width="150" />
+                        <TextBlock x:Name="txtWordCount" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Black" Background="LightYellow" />
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
 
             <!-- Boutons d'action -->
@@ -74,9 +84,6 @@
 						Click="BtnCancel_Click"/>
             </StackPanel>
         </StackPanel>
-
-
-
 
     </Grid>
 </Window>
